@@ -248,7 +248,7 @@ What was the maximum ozone value in the month of May (i.e. Month = 5)?
 ### Answer
 115
 
-### Explantion
+### Explanation
 
 ```R
 quiz_data = read.csv('hw1_data.csv')
