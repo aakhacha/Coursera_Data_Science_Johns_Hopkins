@@ -1,4 +1,4 @@
-# Coursera_Data_Science_Johns_Hopkins
+# Coursera Data Science - Johns Hopkins University
 [Coursera - Data Science - Johns Hopkins University](https://www.coursera.org/specializations/jhu-data-science)
 
 ## About this Specialization
