@@ -1,0 +1,244 @@
+---
+title: "Top US 50 Cities by Population"
+author: "Armen Khachatourian"
+date: "July 20, 2018"
+output: html_document
+---
+<br>
+
+#### Step 1: Load Packages
+```{r, warning=FALSE}
+library(leaflet)
+library(scales)    
+```
+<br>
+
+#### Step 2: Load Data (city_state, population, lat, lng)
+source: https://simplemaps.com/data/us-cities
+<br>
+
+```{r, include = FALSE}
+city_state <- c("New York, NY",
+                "Los Angeles, CA",
+                "Chicago, IL",
+                "Miami, FL",
+                "Dallas, TX",
+                "Philadelphia, PA",
+                "Houston, TX",
+                "Washington, DC",
+                "Atlanta, GA",
+                "Boston, MA",
+                "Phoenix, AZ",
+                "San Francisco, CA",
+                "Seattle, WA",
+                "Detroit, MI",
+                "San Diego, CA",
+                "Minneapolis, MN",
+                "Tampa, FL",
+                "Denver, CO",
+                "Brooklyn, NY",
+                "Queens, NY",
+                "Baltimore, MD",
+                "Saint Louis, MO",
+                "Riverside, CA",
+                "Las Vegas, NV",
+                "Portland, OR",
+                "San Antonio, TX",
+                "Sacramento, CA",
+                "San Jose, CA",
+                "Orlando, FL",
+                "Cleveland, OH",
+                "Pittsburgh, PA",
+                "Manhattan, NY",
+                "Cincinnati, OH",
+                "Austin, TX",
+                "Kansas City, MO",
+                "Indianapolis, IN",
+                "Columbus, OH",
+                "Virginia Beach, VA",
+                "Bronx, NY",
+                "Charlotte, NC",
+                "Milwaukee, WI",
+                "Providence, RI",
+                "Jacksonville, FL",
+                "Memphis, TN",
+                "Nashville, TN",
+                "Salt Lake City, UT",
+                "Richmond, VA",
+                "New Orleans, LA",
+                "Raleigh, NC",
+                "Louisville, KY")
+
+population <- c("19164071",
+                "12740381",
+                "8639278",
+                "6247425",
+                "5634307",
+                "5591554",
+                "5424720",
+                "5191844",
+                "5080712",
+                "4556916",
+                "4054083",
+                "3548847",
+                "3541236",
+                "3520589",
+                "3181172",
+                "2866604",
+                "2744107",
+                "2741534",
+                "2629150",
+                "2333054",
+                "2181206",
+                "2096990",
+                "2065627",
+                "2044731",
+                "2027629",
+                "1976787",
+                "1830061",
+                "1804359",
+                "1757288",
+                "1731637",
+                "1722206",
+                "1643734",
+                "1634573",
+                "1633847",
+                "1590762",
+                "1550488",
+                "1495146",
+                "1487505",
+                "1455720",
+                "1438351",
+                "1377104",
+                "1198789",
+                "1141459",
+                "1069661",
+                "1065078",
+                "1061156",
+                "1041877",
+                "1024421",
+                "1005457",
+                "1003412")
+
+lat <-  c("40.6943",
+          "34.114",
+          "41.8373",
+          "25.784",
+          "32.7938",
+          "40.0076",
+          "29.7871",
+          "38.9047",
+          "33.7627",
+          "42.3189",
+          "33.5722",
+          "37.7561",
+          "47.6217",
+          "42.3834",
+          "32.8312",
+          "44.9635",
+          "27.9937",
+          "39.7621",
+          "40.6501",
+          "40.7498",
+          "39.3051",
+          "38.6358",
+          "33.9382",
+          "36.2288",
+          "45.5372",
+          "29.4722",
+          "38.5666",
+          "37.302",
+          "28.4801",
+          "41.4766",
+          "40.4396",
+          "40.7834",
+          "39.1412",
+          "30.3038",
+          "39.1239",
+          "39.7771",
+          "39.9859",
+          "36.7335",
+          "40.8501",
+          "35.208",
+          "43.064",
+          "41.8229",
+          "30.3322",
+          "35.1047",
+          "36.1714",
+          "40.7774",
+          "37.5294",
+          "30.0687",
+          "35.8323",
+          "38.1662")
+
+lng <- c("-73.9249",
+         "-118.4068",
+         "-87.6861",
+         "-80.2102",
+         "-96.7659",
+         "-75.134",
+         "-95.3936",
+         "-77.0163",
+         "-84.4231",
+         "-71.0838",
+         "-112.0891",
+         "-122.4429",
+         "-122.3238",
+         "-83.1024",
+         "-117.1225",
+         "-93.2679",
+         "-82.4454",
+         "-104.8759",
+         "-73.9496",
+         "-73.7976",
+         "-76.6144",
+         "-90.2451",
+         "-117.3949",
+         "-115.2603",
+         "-122.65",
+         "-98.5247",
+         "-121.4683",
+         "-121.8488",
+         "-81.3448",
+         "-81.6805",
+         "-79.9763",
+         "-73.9662",
+         "-84.506",
+         "-97.7545",
+         "-94.5541",
+         "-86.1458",
+         "-82.9852",
+         "-76.0435",
+         "-73.8662",
+         "-80.8308",
+         "-87.9669",
+         "-71.4186",
+         "-81.6749",
+         "-89.9773",
+         "-86.7844",
+         "-111.9301",
+         "-77.4755",
+         "-89.9288",
+         "-78.6441",
+         "-85.6488")
+```
+<br>
+
+#### Step 3: Alter Data Frame for Leaflet
+```{r}
+df <- data.frame(city_state,population = as.numeric(population),lat = as.numeric(lat),lng = as.numeric(lng))
+df <- df[order(-df$population),] 
+df$pop_rank <- row(df, as.factor = FALSE)[1:50]
+df$popup <- paste(df$city_state,"<br>", "Population: ", comma_format()(df$population),"<br>", "Ranking: ", df$pop_rank, sep = "", collapse = NULL)
+```
+<br>
+
+#### Step 4: Create Map
+```{r, message=FALSE}
+my_map <- df %>%
+  leaflet() %>% 
+  addTiles() %>% 
+  addCircles(weight = 1, radius = sqrt(df$population) * 80, popup = df$popup)
+
+my_map
+```
