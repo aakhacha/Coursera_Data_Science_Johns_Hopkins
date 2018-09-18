@@ -22,7 +22,7 @@ Suppose we build a prediction algorithm on a data set and it is 100% accurate on
 
 * We have too few predictors to get good out of sample accuracy.
 * Our algorithm may be overfitting the training data, predicting both the signal and the noise.
-* We may be using a bad algorithm that doesn’t predict well on this kind of data.
+* We may be using a bad algorithm that doesnâ€™t predict well on this kind of data.
 * We have used neural networks which has notoriously bad performance.
 
 Answer: </br>
@@ -44,7 +44,7 @@ Answer: </br>
 
 Question 4
 ----------
-What are some common error rates for predicting binary variables (i.e. variables with two possible values like yes/no, disease/normal, clicked/didn’t click)? Check the correct answer(s).
+What are some common error rates for predicting binary variables (i.e. variables with two possible values like yes/no, disease/normal, clicked/didnâ€™t click)? Check the correct answer(s).
 
 * Predictive value of a positive
 * Correlation
@@ -70,4 +70,4 @@ sensitivity (recall) = TP / (TP+FN)
 specificity = TN / (TN+FP)
 prevalence = (TP+FN) / (TP+FN+TN+FP)
 
-p = (10<sub>-3 * 0.99) / (10<sub>-3 * 0.99 + 0.01 * 0.999) = 0.09
+p = (10<sup>-3</sup> * 0.99) / (10<sup>-3</sup> * 0.99 + 0.01 * 0.999) = 0.09
