@@ -1,6 +1,7 @@
 # The Data Scientist's Toolbox - Week 1 - Quiz 1
 ## Coursera - Data Science - Johns Hopkins
 
+
 Question 1
 ----------
 Which of the following are courses in the Data Science Specialization? Select all that apply:
