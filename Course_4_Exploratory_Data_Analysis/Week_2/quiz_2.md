@@ -51,7 +51,6 @@ xyplot(weight ~ Time | Diet, BodyWeight)
 Answer Options: </br>
 A set of 3 panels showing the relationship between weight and time for each diet.
 
-<img src="https://github.com/mGalarnyk/datasciencecoursera/blob/master/4_Exploratory_Data_Analysis/data/quizImages/q2q2.png" alt="Exploratory Data Analysis Quiz 2 question 2" >
 
 Question 3
 ----------
@@ -161,8 +160,6 @@ airquality = transform(airquality, Month = factor(Month))
 qplot(Wind, Ozone, data = airquality, facets = . ~ Month)
 ```
 
-<img src="https://github.com/mGalarnyk/datasciencecoursera/blob/master/4_Exploratory_Data_Analysis/data/quizImages/q2q7.png" alt="Exploratory Data Analysis Quiz 2 question 7" >
-
 Question 8
 ----------
 What is a geom in the ggplot2 system?
@@ -228,5 +225,3 @@ qplot(votes, rating, data = movies) + geom_smooth()
 
 Answer: </br>
 qplot(votes, rating, data = movies) + geom_smooth()
-
-<img src="https://github.com/mGalarnyk/datasciencecoursera/blob/master/4_Exploratory_Data_Analysis/data/quizImages/q2q10.png" alt="Exploratory Data Analysis Quiz 2 question 10" >
